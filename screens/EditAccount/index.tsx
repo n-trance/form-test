@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Input } from "react-native-elements";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useFormik } from "formik";
@@ -71,26 +78,30 @@ export default function App() {
     error: formik.errors[value],
   });
 
-  console.log('formik', formik.errors)
-  console.log('values', formik.values)
-
   return (
-    <ScrollView style={styles.container}>
-      <Text>edit account</Text>
-      <FormInput title="First Name" {...formikHelper("firstName")} />
-      <FormInput title="Last Name" {...formikHelper("lastName")} />
-      <FormInput title="Email" {...formikHelper("email")} />
-      <FormInput title="Phone" {...formikHelper("phone")} />
-      <FormInput title="Postcode" {...formikHelper("postcode")} />
-      <StatePicker />
-      <FormInput title="Company Name" {...formikHelper("companyName")} />
-      <FormInput title="ABN" {...formikHelper("abn")} />
-      <FormInput title="Hourly Rate (in $)" {...formikHelper("hourlyRate")} />
-      <FormInput
-        title="Insurance Expiry Date"
-        {...formikHelper("insuranceExpiryDate")}
-      />
-    </ScrollView>
+    <KeyboardAvoidingView
+      enabled
+      behavior="height"
+      keyboardVerticalOffset={120}
+      style={styles.container}
+    >
+      <ScrollView style={styles.container}>
+        <Text>edit account</Text>
+        <FormInput title="First Name" {...formikHelper("firstName")} />
+        <FormInput title="Last Name" {...formikHelper("lastName")} />
+        <FormInput title="Email" {...formikHelper("email")} />
+        <FormInput title="Phone" {...formikHelper("phone")} />
+        <FormInput title="Postcode" {...formikHelper("postcode")} />
+        <StatePicker />
+        <FormInput title="Company Name" {...formikHelper("companyName")} />
+        <FormInput title="ABN" {...formikHelper("abn")} />
+        <FormInput title="Hourly Rate (in $)" {...formikHelper("hourlyRate")} />
+        <FormInput
+          title="Insurance Expiry Date"
+          {...formikHelper("insuranceExpiryDate")}
+        />
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
