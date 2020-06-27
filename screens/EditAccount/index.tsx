@@ -102,7 +102,6 @@ export default function App({ navigation, route }) {
       style={styles.container}
     >
       <ScrollView style={styles.container}>
-        <Text>edit account</Text>
         <FormInput title="First Name" {...formikHelper("firstName")} />
         <FormInput title="Last Name" {...formikHelper("lastName")} />
         <FormInput title="Email" {...formikHelper("email")} />
