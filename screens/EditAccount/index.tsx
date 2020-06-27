@@ -1,13 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
-  View,
-  TextInput,
   ScrollView,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback,
+  Button,
 } from "react-native";
 import { Input } from "react-native-elements";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -68,12 +66,22 @@ const onSubmit = (values) => {
   console.log("vals", values);
 };
 
-export default function App() {
+export default function App({ navigation }) {
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema: schema,
   });
+
+  const [canSave, setCanSave] = useState(false);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button disabled={!canSave} onPress={() => {}} title="save" />
+      ),
+    });
+  }, [navigation, canSave]);
 
   const formikHelper = (value: keyof FormValues) => ({
     value: formik.values[value],

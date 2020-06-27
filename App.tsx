@@ -28,10 +28,7 @@ const AppNavigation = () => (
       <Stack.Screen
         name="EditAccount"
         component={EditAccount}
-        options={{
-          title: "My Account",
-          headerRight: () => <Button onPress={() => {}} title="save" />,
-        }}
+        options={{ title: "My Account" }}
       />
     </Stack.Navigator>
   </NavigationContainer>
