@@ -3,27 +3,29 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const UploadResume = () => (
-  <View
-    style={{
-      backgroundColor: teal,
-      borderRadius: 50,
-      height: 50,
-      width: 220,
-      justifyContent: "center",
-    }}
-  >
-    <Text
+const UploadResume = ({ onPress }) => (
+  <TouchableOpacity onPress={onPress}>
+    <View
       style={{
-        color: "white",
-        fontSize: 18,
-        fontWeight: "500",
-        textAlign: "center",
+        backgroundColor: teal,
+        borderRadius: 50,
+        height: 50,
+        width: 220,
+        justifyContent: "center",
       }}
     >
-      Upload new Resume
-    </Text>
-  </View>
+      <Text
+        style={{
+          color: "white",
+          fontSize: 18,
+          fontWeight: "500",
+          textAlign: "center",
+        }}
+      >
+        Upload new Resume
+      </Text>
+    </View>
+  </TouchableOpacity>
 );
 
 const Resume = ({ uri, onPress }) => {
