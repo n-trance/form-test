@@ -2,6 +2,29 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 
+const UploadResume = () => (
+  <View
+    style={{
+      backgroundColor: teal,
+      borderRadius: 50,
+      height: 50,
+      width: 220,
+      justifyContent: "center",
+    }}
+  >
+    <Text
+      style={{
+        color: "white",
+        fontSize: 18,
+        fontWeight: "500",
+        textAlign: "center",
+      }}
+    >
+      Upload new Resume
+    </Text>
+  </View>
+);
+
 const AccountItem = ({ title, value, style }) => {
   return (
     <View style={{ ...style }}>
@@ -93,7 +116,7 @@ export default function App() {
         style={styles.accountItem}
       />
       <Text>Resume</Text>
-      <Text>Resume Button</Text>
+      <UploadResume />
       <AccountItem
         title="Insurance Expiry Date"
         value={insuranceExpiryDate}
