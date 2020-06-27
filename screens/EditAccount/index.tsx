@@ -62,26 +62,29 @@ const initialValues: FormValues = {
   insuranceExpiryDate: "",
 };
 
-const onSubmit = (values) => {
-  console.log("vals", values);
-};
+export default function App({ navigation, route }) {
+  // get params
+  const accountInfo = route.params?.accountInfo || initialValues;
 
-export default function App({ navigation }) {
   const formik = useFormik({
-    initialValues,
-    onSubmit,
+    initialValues: accountInfo,
+    onSubmit: () => {}, // not required
     validationSchema: schema,
   });
 
-  const [canSave, setCanSave] = useState(false);
+  // on mount validate form
+  useEffect(() => {
+    formik.validateForm();
+  }, []);
 
+  // can save if form is valid
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button disabled={!canSave} onPress={() => {}} title="save" />
+        <Button disabled={!formik.isValid} onPress={() => {}} title="save" />
       ),
     });
-  }, [navigation, canSave]);
+  }, [formik.isValid]);
 
   const formikHelper = (value: keyof FormValues) => ({
     value: formik.values[value],
