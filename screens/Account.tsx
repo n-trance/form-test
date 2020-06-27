@@ -5,15 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const UploadResume = ({ onPress }) => (
   <TouchableOpacity onPress={onPress}>
-    <View
-      style={{
-        backgroundColor: teal,
-        borderRadius: 50,
-        height: 50,
-        width: 220,
-        justifyContent: "center",
-      }}
-    >
+    <View style={styles.resumeButton}>
       <Text
         style={{
           color: "white",
@@ -100,9 +92,7 @@ export default function App() {
 
   return (
     <ScrollView style={styles.container}>
-      <View
-        style={{ flex: 1, flexDirection: "row", alignContent: "space-between" }}
-      >
+      <View style={styles.horizontalContainer}>
         <AccountItem
           title="First Name"
           value={firstName}
@@ -116,12 +106,14 @@ export default function App() {
       </View>
       <AccountItem title="Email" value={email} style={styles.accountItem} />
       <AccountItem title="Phone" value={phone} style={styles.accountItem} />
-      <AccountItem
-        title="Postcode"
-        value={postcode}
-        style={styles.accountItem}
-      />
-      <AccountItem title="State" value={state} style={styles.accountItem} />
+      <View style={styles.horizontalContainer}>
+        <AccountItem
+          title="Postcode"
+          value={postcode}
+          style={styles.accountItem}
+        />
+        <AccountItem title="State" value={state} style={styles.accountItem} />
+      </View>
       <AccountItem
         title="Company Name"
         value={companyName}
@@ -133,8 +125,10 @@ export default function App() {
         value={hourlyRate}
         style={styles.accountItem}
       />
-      <Resume />
-      <UploadResume />
+      <View style={styles.horizontalContainer}>
+        <Resume />
+        <UploadResume />
+      </View>
       <AccountItem
         title="Insurance Expiry Date"
         value={insuranceExpiryDate}
@@ -152,9 +146,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
+  horizontalContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignContent: "space-between",
+  },
   accountItem: { flex: 1, margin: 10 },
   title: { color: teal, fontWeight: "bold", fontSize: 18 },
   text: { fontWeight: "500", fontSize: 16 },
   toBeDetermined: { color: "gray", fontWeight: "500", fontSize: 16 },
   resumeText: { color: lightBlue, fontWeight: "500", fontSize: 16 },
+  resumeButton: {
+    margin: 10,
+    backgroundColor: teal,
+    borderRadius: 50,
+    height: 50,
+    width: 220,
+    justifyContent: "center",
+  },
 });
