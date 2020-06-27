@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
@@ -77,6 +76,19 @@ interface FormValues {
 }
 
 const initialValues: FormValues = {
+  firstName: "Bruce",
+  lastName: "Banner",
+  email: "bruce.banner@marvel.com",
+  phone: "0400000000",
+  postcode: "2093",
+  state: "NSW",
+  companyName: "Marvel Ltd",
+  abn: "12123123123",
+  hourlyRate: "395",
+  insuranceExpiryDate: "31 May 1970",
+};
+
+const validForm: FormValues = {
   firstName: "",
   lastName: "",
   email: "",
