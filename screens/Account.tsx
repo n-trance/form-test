@@ -9,7 +9,11 @@ import {
 } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 
-const UploadResume = ({ onPress }) => (
+interface UploadResume {
+  onPress: () => void;
+}
+
+const UploadResume = ({ onPress }: UploadResume) => (
   <TouchableOpacity onPress={onPress}>
     <View style={styles.resumeButton}>
       <Text
@@ -26,7 +30,12 @@ const UploadResume = ({ onPress }) => (
   </TouchableOpacity>
 );
 
-const Resume = ({ uri, onPress }) => {
+interface Resume {
+  uri: string;
+  onPress: () => void;
+}
+
+const Resume = ({ uri, onPress }: Resume) => {
   return (
     <View style={styles.accountItem}>
       <Text style={styles.title}>Resume</Text>
