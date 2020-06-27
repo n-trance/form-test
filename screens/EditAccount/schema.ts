@@ -51,6 +51,6 @@ export const schema = yup.object().shape({
   hourlyRate: yup
     .string()
     .matches(/^[0-9]+(\.[0-9][0-9]?)?$/, "Your hourly rate is not valid")
-    .optional(),
+    .required("Your Hourly Rate is required"),
   insuranceExpiryDate: yup.date().required("Insurance expiry date required"),
 });
