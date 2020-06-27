@@ -1,7 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import * as DocumentPicker from "expo-document-picker";
 
 const UploadResume = ({ onPress }) => (
   <TouchableOpacity onPress={onPress}>
@@ -90,6 +96,15 @@ export default function App() {
     insuranceExpiryDate,
   } = info;
 
+  const [fileUri, setFileUri] = useState("");
+
+  const getFile = async () => {
+    const file = await DocumentPicker.getDocumentAsync();
+    if (file.type === "success") {
+      setFileUri(file.uri);
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.horizontalContainer}>
@@ -126,8 +141,8 @@ export default function App() {
         style={styles.accountItem}
       />
       <View style={styles.horizontalContainer}>
-        <Resume />
-        <UploadResume />
+        <Resume uri={fileUri} onPress={() => {}} />
+        <UploadResume onPress={getFile} />
       </View>
       <AccountItem
         title="Insurance Expiry Date"
