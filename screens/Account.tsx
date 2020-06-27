@@ -42,7 +42,7 @@ const AccountItem = ({ title, value, style }) => {
       {!!value ? (
         <Text style={styles.text}>{value}</Text>
       ) : (
-        <Text style={styles.toBeDetermined}>Bruce Banner</Text>
+        <Text style={styles.toBeDetermined}>None</Text>
       )}
     </View>
   );
