@@ -1,8 +1,8 @@
 import * as yup from "yup";
 
-type States = "NSW" | "VIC" | "QLD" | "WA" | "SA" | "TAS" | "ACT" | "NT";
+export type States = "NSW" | "VIC" | "QLD" | "WA" | "SA" | "TAS" | "ACT" | "NT";
 
-const auStates: States[] = [
+export const auStates: States[] = [
   "NSW",
   "VIC",
   "QLD",
