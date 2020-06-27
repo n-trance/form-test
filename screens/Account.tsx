@@ -89,7 +89,7 @@ const initialValues: FormValues = {
   insuranceExpiryDate: "",
 };
 
-export default function App() {
+export default function App({ navigation }) {
   const [info, setInfo] = useState(initialValues);
 
   const {
@@ -150,7 +150,12 @@ export default function App() {
         style={styles.accountItem}
       />
       <View style={styles.horizontalContainer}>
-        <Resume uri={fileUri} onPress={() => {}} />
+        <Resume
+          uri={fileUri}
+          onPress={() => {
+            navigation.navigate("PDFViewer", { uri: fileUri });
+          }}
+        />
         <UploadResume onPress={getFile} />
       </View>
       <AccountItem

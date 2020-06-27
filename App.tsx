@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import Account from "./screens/Account";
 import EditAccount from "./screens/EditAccount";
+import PDFViewer from "./screens/PDFViewer";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ const AppNavigation = () => (
         component={EditAccount}
         options={{ title: "My Account" }}
       />
+      <Stack.Screen name="PDFViewer" component={PDFViewer} />
     </Stack.Navigator>
   </NavigationContainer>
 );
