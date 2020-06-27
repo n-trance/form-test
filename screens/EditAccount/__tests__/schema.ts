@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { schema } from "../form";
+import { schema } from "../schema";
 
 describe("First Name Tests", () => {
   it("must be string", async () => {
