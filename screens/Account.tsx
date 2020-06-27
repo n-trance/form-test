@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
+import { TextInputMask } from "react-native-masked-text";
 
 interface UploadResume {
   onPress: () => void;
@@ -49,18 +50,41 @@ const Resume = ({ uri, onPress }: Resume) => {
   );
 };
 
-const AccountItem = ({ title, value, style }) => {
+const AccountItem = ({ title, value, render, style }) => {
+  let Item;
+  if (!!value && !!render) {
+    Item = () => render(value);
+  } else if (!!value) {
+    Item = () => <Text style={styles.text}>{value}</Text>;
+  } else {
+    Item = () => <Text style={styles.toBeDetermined}>None</Text>;
+  }
+
   return (
     <View style={{ ...style }}>
       <Text style={styles.title}>{title}</Text>
-      {!!value ? (
-        <Text style={styles.text}>{value}</Text>
-      ) : (
-        <Text style={styles.toBeDetermined}>None</Text>
-      )}
+      <Item />
     </View>
   );
 };
+
+const PhoneNumberMask = ({ value, style }) => (
+  <TextInputMask
+    value={value}
+    type="custom"
+    options={{ mask: "99 9999 9999" }}
+    style={style}
+  />
+);
+
+const ABNMask = ({ value, style }) => (
+  <TextInputMask
+    value={value}
+    type="custom"
+    options={{ mask: "99 999 999 999" }}
+    style={style}
+  />
+);
 
 interface FormValues {
   firstName: string;
@@ -141,7 +165,14 @@ export default function App({ navigation }) {
         />
       </View>
       <AccountItem title="Email" value={email} style={styles.accountItem} />
-      <AccountItem title="Phone" value={phone} style={styles.accountItem} />
+      <AccountItem
+        title="Phone"
+        value={phone}
+        style={styles.accountItem}
+        render={(val: string) => (
+          <PhoneNumberMask value={val} style={styles.text} />
+        )}
+      />
       <View style={styles.horizontalContainer}>
         <AccountItem
           title="Postcode"
@@ -155,7 +186,12 @@ export default function App({ navigation }) {
         value={companyName}
         style={styles.accountItem}
       />
-      <AccountItem title="ABN" value={abn} style={styles.accountItem} />
+      <AccountItem
+        title="ABN"
+        value={abn}
+        style={styles.accountItem}
+        render={(val: string) => <ABNMask value={val} style={styles.text} />}
+      />
       <AccountItem
         title="Hourly Rate (in $)"
         value={hourlyRate}
