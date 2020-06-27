@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const UploadResume = () => (
   <View
@@ -24,6 +25,21 @@ const UploadResume = () => (
     </Text>
   </View>
 );
+
+const Resume = ({ uri, onPress }) => {
+  return (
+    <View style={styles.accountItem}>
+      <Text style={styles.title}>Resume</Text>
+      {uri ? (
+        <TouchableOpacity onPress={onPress}>
+          <Text style={styles.resumeText}>View Here</Text>
+        </TouchableOpacity>
+      ) : (
+        <Text style={styles.toBeDetermined}>None</Text>
+      )}
+    </View>
+  );
+};
 
 const AccountItem = ({ title, value, style }) => {
   return (
@@ -115,7 +131,7 @@ export default function App() {
         value={hourlyRate}
         style={styles.accountItem}
       />
-      <Text>Resume</Text>
+      <Resume />
       <UploadResume />
       <AccountItem
         title="Insurance Expiry Date"
@@ -127,6 +143,7 @@ export default function App() {
 }
 
 const teal = "#1eae95";
+const lightBlue = "#0a9bce";
 
 const styles = StyleSheet.create({
   container: {
@@ -137,4 +154,5 @@ const styles = StyleSheet.create({
   title: { color: teal, fontWeight: "bold", fontSize: 18 },
   text: { fontWeight: "500", fontSize: 16 },
   toBeDetermined: { color: "gray", fontWeight: "500", fontSize: 16 },
+  resumeText: { color: lightBlue, fontWeight: "500", fontSize: 16 },
 });
