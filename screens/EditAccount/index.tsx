@@ -7,6 +7,7 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Input } from "react-native-elements";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -24,12 +25,16 @@ const FormInput = ({ title, value, error, showError, onChange, onBlur }) => {
   );
 };
 
-const StatePicker = () => {
+const StatePicker = ({ error, showError, onChange, onBlur }) => {
   return (
-    <DropDownPicker
-      items={auStates.map((item) => ({ label: item, value: item }))}
-      containerStyle={{ height: 40 }}
-    />
+    <>
+      <DropDownPicker
+        items={auStates.map((item) => ({ label: item, value: item }))}
+        containerStyle={{ height: 40 }}
+        onChangeItem={({ value }: string) => onChange(value)}
+      />
+      {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
+    </>
   );
 };
 
@@ -92,7 +97,7 @@ export default function App() {
         <FormInput title="Email" {...formikHelper("email")} />
         <FormInput title="Phone" {...formikHelper("phone")} />
         <FormInput title="Postcode" {...formikHelper("postcode")} />
-        <StatePicker />
+        <StatePicker {...formikHelper("state")} />
         <FormInput title="Company Name" {...formikHelper("companyName")} />
         <FormInput title="ABN" {...formikHelper("abn")} />
         <FormInput title="Hourly Rate (in $)" {...formikHelper("hourlyRate")} />
