@@ -157,6 +157,8 @@ export default function App({ navigation }) {
     insuranceExpiryDate,
   } = info;
 
+  console.log("info", info);
+
   // on component update
   useEffect(() => {
     navigation.setOptions({

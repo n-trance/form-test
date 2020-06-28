@@ -79,13 +79,21 @@ export default function App({ navigation, route }) {
   }, []);
 
   // can save if form is valid
+  // checks if isValid or form Values have updated
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button disabled={!formik.isValid} onPress={() => {}} title="save" />
+        <Button
+          disabled={!formik.isValid}
+          onPress={() => {
+            console.log("formik vals", formik.values);
+            updateAccountInfo(formik.values);
+          }}
+          title="save"
+        />
       ),
     });
-  }, [formik.isValid]);
+  }, [formik.isValid, formik.values]);
 
   const formikHelper = (value: keyof FormValues) => ({
     value: formik.values[value],
