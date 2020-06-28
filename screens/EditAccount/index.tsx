@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -19,6 +18,7 @@ import { auStates, schema } from "./schema";
 import { PRIMARY_COLOR } from "../../constants";
 import { FormInput, FormInputWithMask } from "./FormInput";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { NavigationProp, RouteProp } from "@react-navigation/native";
 
 const StatePicker = ({
   error,
@@ -32,7 +32,7 @@ const StatePicker = ({
   onBlur: (e: any) => void;
 }) => {
   return (
-    <View style={[styles.formInputContainer, { zIndex: 1 }]}>
+    <View style={[styles.formInputContainer, styles.dropDown]}>
       <Text style={styles.title}>State</Text>
       <DropDownPicker
         items={auStates.map((item) => ({ label: item, value: item }))}
@@ -70,11 +70,15 @@ const initialValues: FormValues = {
   insuranceExpiryDate: "",
 };
 
-export default function App({ navigation, route }) {
+interface EditAccountProps {
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, any>;
+}
+
+export default function EditAccount({ navigation, route }: EditAccountProps) {
   // get params
   const accountInfo = route.params?.accountInfo || initialValues;
   const { updateAccountInfo } = route.params;
-
   const formik = useFormik({
     initialValues: accountInfo,
     onSubmit: () => {}, // not required
@@ -210,4 +214,5 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
   dropDownContainer: { height: 40 },
+  dropDown: { zIndex: 1 },
 });

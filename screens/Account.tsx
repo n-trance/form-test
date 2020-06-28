@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  ReactElement,
-  useEffect,
-} from "react";
+import React, { useState, ReactElement, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,6 +11,7 @@ import * as DocumentPicker from "expo-document-picker";
 import { TextInputMask } from "react-native-masked-text";
 
 import { PRIMARY_COLOR, LIGHT_BLUE } from "../constants";
+import { NavigationProp } from "@react-navigation/native";
 
 interface UploadResume {
   onPress: () => void;
@@ -23,16 +20,7 @@ interface UploadResume {
 const UploadResume = ({ onPress }: UploadResume) => (
   <TouchableOpacity onPress={onPress}>
     <View style={styles.resumeButton}>
-      <Text
-        style={{
-          color: "white",
-          fontSize: 18,
-          fontWeight: "500",
-          textAlign: "center",
-        }}
-      >
-        Upload new Resume
-      </Text>
+      <Text style={styles.resumeButtonText}>Upload new Resume</Text>
     </View>
   </TouchableOpacity>
 );
@@ -60,17 +48,24 @@ const Resume = ({ uri, onPress }: Resume) => {
 const AccountItem = ({
   title,
   value,
-  render,
+  mask,
   style,
 }: {
   title: string;
   value: string;
-  render?: (val: string) => ReactElement;
+  mask?: string;
   style: any;
 }) => {
   let Item;
-  if (!!value && !!render) {
-    Item = () => render(value);
+  if (!!value && !!mask) {
+    Item = () => (
+      <TextInputMask
+        value={value}
+        type="custom"
+        options={{ mask }}
+        style={styles.text}
+      />
+    );
   } else if (!!value) {
     Item = () => <Text style={styles.text}>{value}</Text>;
   } else {
@@ -84,24 +79,6 @@ const AccountItem = ({
     </View>
   );
 };
-
-const PhoneNumberMask = ({ value, style }) => (
-  <TextInputMask
-    value={value}
-    type="custom"
-    options={{ mask: "99 9999 9999" }}
-    style={style}
-  />
-);
-
-const ABNMask = ({ value, style }) => (
-  <TextInputMask
-    value={value}
-    type="custom"
-    options={{ mask: "99 999 999 999" }}
-    style={style}
-  />
-);
 
 interface FormValues {
   firstName: string;
@@ -142,7 +119,11 @@ const validForm: FormValues = {
   insuranceExpiryDate: "",
 };
 
-export default function App({ navigation }) {
+interface AccountProps {
+  navigation: NavigationProp<any>;
+}
+
+export default function Account({ navigation }: AccountProps) {
   const [info, setInfo] = useState(initialValues);
 
   const {
@@ -205,9 +186,7 @@ export default function App({ navigation }) {
         title="Phone"
         value={phone}
         style={styles.accountItem}
-        render={(val: string) => (
-          <PhoneNumberMask value={val} style={styles.text} />
-        )}
+        mask="99 9999 9999"
       />
       <View style={styles.horizontalContainer}>
         <AccountItem
@@ -226,7 +205,7 @@ export default function App({ navigation }) {
         title="ABN"
         value={abn}
         style={styles.accountItem}
-        render={(val: string) => <ABNMask value={val} style={styles.text} />}
+        mask="99 999 999 999"
       />
       <AccountItem
         title="Hourly Rate (in $)"
@@ -247,6 +226,8 @@ export default function App({ navigation }) {
         value={insuranceExpiryDate}
         style={styles.accountItem}
       />
+      {/* spacing at bottom of screen */}
+      <View style={{ height: 100 }} />
     </ScrollView>
   );
 }
@@ -263,7 +244,10 @@ const styles = StyleSheet.create({
   },
   accountItem: { flex: 1, margin: 10 },
   title: { color: PRIMARY_COLOR, fontWeight: "bold", fontSize: 18 },
-  text: { fontWeight: "500", fontSize: 16 },
+  text: {
+    fontWeight: "500",
+    fontSize: 17,
+  },
   toBeDetermined: { color: "gray", fontWeight: "500", fontSize: 16 },
   resumeText: { color: LIGHT_BLUE, fontWeight: "500", fontSize: 16 },
   resumeButton: {
@@ -273,5 +257,11 @@ const styles = StyleSheet.create({
     height: 50,
     width: 220,
     justifyContent: "center",
+  },
+  resumeButtonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "500",
+    textAlign: "center",
   },
 });
