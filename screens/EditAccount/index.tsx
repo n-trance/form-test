@@ -18,7 +18,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 import { StatePicker } from "./components/StatePicker";
 import { SaveButton } from "./components/SaveButton";
-import { FormValues } from "../../types";
+import { FormValues } from "../../types/FormValues";
 import { styles } from "./styles";
 
 const initialValues: FormValues = {
