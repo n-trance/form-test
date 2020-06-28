@@ -7,10 +7,11 @@ import {
   KeyboardAvoidingView,
   Button,
   View,
+  TextInput,
 } from "react-native";
-import { Input } from "react-native-elements";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useFormik } from "formik";
+import { TextInputMask } from "react-native-masked-text";
 
 import { auStates, schema } from "./schema";
 import { PRIMARY_COLOR } from "../../constants";
@@ -22,6 +23,7 @@ const FormInput = ({
   showError,
   onChange,
   onBlur,
+  mask,
 }: {
   title: string;
   value: string;
@@ -29,11 +31,36 @@ const FormInput = ({
   showError: boolean;
   onChange: (e: any) => void;
   onBlur: (e: any) => void;
+  mask?: string;
 }) => {
+  const InputComponent = () => {
+    if (!!mask) {
+      return (
+        <TextInputMask
+          style={styles.text}
+          value={value}
+          onChangeText={onChange}
+          onBlur={onBlur}
+          type="custom"
+          options={{ mask }}
+        />
+      );
+    } else {
+      return (
+        <TextInput
+          style={styles.text}
+          value={value}
+          onChangeText={onChange}
+          onBlur={onBlur}
+        />
+      );
+    }
+  };
+
   return (
     <View style={styles.formInputContainer}>
       <Text style={styles.title}>{title}</Text>
-      <Input value={value} onChangeText={onChange} onBlur={onBlur} />
+      <InputComponent />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
     </View>
   );
@@ -141,11 +168,19 @@ export default function App({ navigation, route }) {
         <FormInput title="First Name" {...formikHelper("firstName")} />
         <FormInput title="Last Name" {...formikHelper("lastName")} />
         <FormInput title="Email" {...formikHelper("email")} />
-        <FormInput title="Phone" {...formikHelper("phone")} />
+        <FormInput
+          title="Phone"
+          mask={"99 9999 9999"}
+          {...formikHelper("phone")}
+        />
         <FormInput title="Postcode" {...formikHelper("postcode")} />
         <StatePicker {...formikHelper("state")} />
         <FormInput title="Company Name" {...formikHelper("companyName")} />
-        <FormInput title="ABN" {...formikHelper("abn")} />
+        <FormInput
+          title="ABN"
+          mask={"99 999 999 999"}
+          {...formikHelper("abn")}
+        />
         <FormInput title="Hourly Rate (in $)" {...formikHelper("hourlyRate")} />
         <FormInput
           title="Insurance Expiry Date"
@@ -166,7 +201,14 @@ const styles = StyleSheet.create({
     color: PRIMARY_COLOR,
     fontWeight: "bold",
     fontSize: 18,
-    marginLeft: 10,
+    margin: 10,
   },
-  dropDownContainer: { height: 40, margin: 10 },
+  text: {
+    fontWeight: "500",
+    fontSize: 17,
+    borderBottomColor: "gray",
+    borderBottomWidth: 1.2,
+    margin: 10,
+  },
+  dropDownContainer: { height: 40 },
 });
