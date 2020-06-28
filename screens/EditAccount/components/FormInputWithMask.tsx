@@ -22,7 +22,7 @@ export const FormInputWithMask = ({
   onBlur,
   mask,
 }: FormInputWithMask) => {
-  const errorStyle = { color: "maroon" };
+  const errorStyle = { color: "maroon", borderBottomColor: "maroon" };
   const showErrorStyle = showError ? errorStyle : null;
   return (
     <View style={styles.formInputContainer}>
