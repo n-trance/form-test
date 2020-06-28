@@ -5,8 +5,25 @@ import { NavigationContainer } from "@react-navigation/native";
 import Account from "./screens/Account";
 import EditAccount from "./screens/EditAccount";
 import PDFViewer from "./screens/PDFViewer";
+import { PRIMARY_COLOR } from "./constants";
 
 const Stack = createStackNavigator();
+
+// screen options
+const headerOptions: any = {
+  title: "My Account",
+  headerTintColor: PRIMARY_COLOR,
+  headerStyle: {
+    height: 100,
+  },
+  headerTitleStyle: {
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  headerTitleAlign: "left",
+  headerTitleAllowFontScaling: true,
+  headerBackTitleVisible: false,
+};
 
 const AppNavigation = () => (
   <NavigationContainer>
@@ -14,12 +31,12 @@ const AppNavigation = () => (
       <Stack.Screen
         name="Account"
         component={Account}
-        options={{ title: "My Account" }}
+        options={headerOptions}
       />
       <Stack.Screen
         name="EditAccount"
         component={EditAccount}
-        options={{ title: "My Account" }}
+        options={headerOptions}
       />
       <Stack.Screen name="PDFViewer" component={PDFViewer} />
     </Stack.Navigator>
