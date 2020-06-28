@@ -21,11 +21,10 @@ export const StatePicker = ({
   onBlur,
 }: StatePicker) => {
   return (
-    <View style={[styles.formInputContainer, styles.dropDown]}>
+    <View style={styles.formInputContainer}>
       <Text style={styles.title}>State</Text>
       <DropDownPicker
         items={auStates.map((item) => ({ label: item, value: item }))}
-        containerStyle={styles.dropDownContainer}
         onChangeItem={({ value }: { value: string }) => onChange(value)}
       />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
@@ -53,5 +52,4 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
   dropDownContainer: { height: 40 },
-  dropDown: { zIndex: 1 },
 });

@@ -21,5 +21,4 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
   dropDownContainer: { height: 40 },
-  dropDown: { zIndex: 1 },
 });
