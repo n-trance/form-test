@@ -8,6 +8,7 @@ import {
   Button,
   View,
   TextInput,
+  Alert,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useFormik } from "formik";
@@ -140,8 +141,8 @@ export default function App({ navigation, route }) {
         <Button
           disabled={!formik.isValid}
           onPress={() => {
-            console.log("formik vals", formik.values);
             updateAccountInfo(formik.values);
+            Alert.alert("Account Details Saved");
           }}
           title="Save"
         />
