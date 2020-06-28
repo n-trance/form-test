@@ -9,6 +9,7 @@ import {
   View,
   TextInput,
   Alert,
+  KeyboardType,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useFormik } from "formik";
@@ -24,6 +25,7 @@ const FormInput = ({
   showError,
   onChange,
   onBlur,
+  keyboardType = "default",
 }: {
   title: string;
   value: string;
@@ -31,6 +33,7 @@ const FormInput = ({
   showError: boolean;
   onChange: (e: any) => void;
   onBlur: (e: any) => void;
+  keyboardType?: KeyboardType;
 }) => {
   return (
     <View style={styles.formInputContainer}>
@@ -40,6 +43,8 @@ const FormInput = ({
         value={value}
         onChangeText={onChange}
         onBlur={onBlur}
+        keyboardType={keyboardType}
+        returnKeyType="done"
       />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
     </View>
@@ -73,6 +78,8 @@ const FormInputWithMask = ({
         onBlur={onBlur}
         type="custom"
         options={{ mask }}
+        keyboardType="number-pad"
+        returnKeyType="done"
       />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
     </View>
@@ -180,13 +187,21 @@ export default function App({ navigation, route }) {
       <ScrollView style={styles.container}>
         <FormInput title="First Name" {...formikHelper("firstName")} />
         <FormInput title="Last Name" {...formikHelper("lastName")} />
-        <FormInput title="Email" {...formikHelper("email")} />
+        <FormInput
+          title="Email"
+          keyboardType="email-address"
+          {...formikHelper("email")}
+        />
         <FormInputWithMask
           title="Phone"
           mask={"99 9999 9999"}
           {...formikHelper("phone")}
         />
-        <FormInput title="Postcode" {...formikHelper("postcode")} />
+        <FormInput
+          title="Postcode"
+          keyboardType="number-pad"
+          {...formikHelper("postcode")}
+        />
         <StatePicker {...formikHelper("state")} />
         <FormInput title="Company Name" {...formikHelper("companyName")} />
         <FormInputWithMask
@@ -194,7 +209,11 @@ export default function App({ navigation, route }) {
           mask={"99 999 999 999"}
           {...formikHelper("abn")}
         />
-        <FormInput title="Hourly Rate (in $)" {...formikHelper("hourlyRate")} />
+        <FormInput
+          title="Hourly Rate (in $)"
+          keyboardType="numeric"
+          {...formikHelper("hourlyRate")}
+        />
         <FormInput
           title="Insurance Expiry Date"
           {...formikHelper("insuranceExpiryDate")}
