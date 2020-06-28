@@ -1,11 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Platform } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { auStates } from "../schema";
 
 import { PRIMARY_COLOR } from "../../../constants";
 
 export interface StatePicker {
+  value: string;
   error: string;
   showError: boolean;
   onChange: (e: any) => void;
@@ -15,15 +16,18 @@ export interface StatePicker {
  * Never got the onBlur to work correctly with the Drop Down picker
  */
 export const StatePicker = ({
+  value,
   error,
   showError,
   onChange,
   onBlur,
 }: StatePicker) => {
+  const addZIndex = Platform.OS === "ios" ? { zIndex: 10 } : {};
   return (
-    <View style={styles.formInputContainer}>
+    <View style={[styles.formInputContainer, addZIndex]}>
       <Text style={styles.title}>State</Text>
       <DropDownPicker
+        defaultValue={value}
         items={auStates.map((item) => ({ label: item, value: item }))}
         onChangeItem={({ value }: { value: string }) => onChange(value)}
       />
