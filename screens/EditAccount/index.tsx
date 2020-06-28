@@ -8,13 +8,17 @@ import {
   Button,
   View,
   Alert,
+  Platform,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useFormik } from "formik";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from "moment";
 
 import { auStates, schema } from "./schema";
 import { PRIMARY_COLOR } from "../../constants";
 import { FormInput, FormInputWithMask } from "./FormInput";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const StatePicker = ({
   error,
@@ -107,6 +111,17 @@ export default function App({ navigation, route }) {
     error: formik.errors[value] as string,
   });
 
+  // date picker states
+  const [show, setShow] = useState(false);
+
+  const onChangeDate = (_, selectedDate) => {
+    const currentDate = selectedDate;
+    console.log("date", currentDate);
+    const date = moment(currentDate).format("DD MMM YYYY");
+    console.log("moment", date);
+    formik.setFieldValue("insuranceExpiryDate", date);
+  };
+
   return (
     <KeyboardAvoidingView
       enabled
@@ -144,10 +159,22 @@ export default function App({ navigation, route }) {
           keyboardType="numeric"
           {...formikHelper("hourlyRate")}
         />
-        <FormInput
-          title="Insurance Expiry Date"
-          {...formikHelper("insuranceExpiryDate")}
-        />
+        <TouchableOpacity onPress={() => setShow(true)}>
+          <FormInput
+            disabled
+            title="Insurance Expiry Date"
+            {...formikHelper("insuranceExpiryDate")}
+          />
+        </TouchableOpacity>
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={new Date(formik.values.insuranceExpiryDate)}
+            mode="date"
+            display="default"
+            onChange={onChangeDate}
+          />
+        )}
         {/* spacing at bottom of screen */}
         <View style={{ height: 200 }} />
       </ScrollView>

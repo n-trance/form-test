@@ -11,6 +11,7 @@ export const FormInput = ({
   onChange,
   onBlur,
   keyboardType = "default",
+  disabled = false,
 }: {
   title: string;
   value: string;
@@ -19,11 +20,13 @@ export const FormInput = ({
   onChange: (e: any) => void;
   onBlur: (e: any) => void;
   keyboardType?: KeyboardType;
+  disabled?: boolean;
 }) => {
   return (
     <View style={styles.formInputContainer}>
       <Text style={styles.title}>{title}</Text>
       <TextInput
+        editable={!disabled}
         style={styles.text}
         value={value}
         onChangeText={onChange}
