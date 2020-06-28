@@ -22,7 +22,7 @@ const headerOptions: any = {
   },
   headerTitleAlign: "left",
   headerTitleAllowFontScaling: true,
-  headerBackTitleVisible: false,
+  headerBackTitle: " ",
 };
 
 const AppNavigation = () => (
