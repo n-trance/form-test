@@ -13,7 +13,21 @@ import { useFormik } from "formik";
 
 import { auStates, schema } from "./schema";
 
-const FormInput = ({ title, value, error, showError, onChange, onBlur }) => {
+const FormInput = ({
+  title,
+  value,
+  error,
+  showError,
+  onChange,
+  onBlur,
+}: {
+  title: string;
+  value: string;
+  error: string;
+  showError: boolean;
+  onChange: (e: any) => void;
+  onBlur: (e: any) => void;
+}) => {
   return (
     <>
       <Text>{title}</Text>
@@ -23,13 +37,23 @@ const FormInput = ({ title, value, error, showError, onChange, onBlur }) => {
   );
 };
 
-const StatePicker = ({ error, showError, onChange, onBlur }) => {
+const StatePicker = ({
+  error,
+  showError,
+  onChange,
+  onBlur,
+}: {
+  error: string;
+  showError: boolean;
+  onChange: (e: any) => void;
+  onBlur: (e: any) => void;
+}) => {
   return (
     <>
       <DropDownPicker
         items={auStates.map((item) => ({ label: item, value: item }))}
         containerStyle={{ height: 40 }}
-        onChangeItem={({ value }: string) => onChange(value)}
+        onChangeItem={({ value }: { value: string }) => onChange(value)}
       />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
     </>
@@ -96,11 +120,11 @@ export default function App({ navigation, route }) {
   }, [formik.isValid, formik.values]);
 
   const formikHelper = (value: keyof FormValues) => ({
-    value: formik.values[value],
-    onChange: formik.handleChange(value),
-    onBlur: formik.handleBlur(value),
-    showError: formik.touched[value] && !!formik.errors[value],
-    error: formik.errors[value],
+    value: formik.values[value] as string,
+    onChange: formik.handleChange(value) as (e: any) => void,
+    onBlur: formik.handleBlur(value) as (e: any) => void,
+    showError: !!formik.touched[value] && !!formik.errors[value],
+    error: formik.errors[value] as string,
   });
 
   return (
