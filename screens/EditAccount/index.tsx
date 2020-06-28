@@ -24,6 +24,35 @@ const FormInput = ({
   showError,
   onChange,
   onBlur,
+}: {
+  title: string;
+  value: string;
+  error: string;
+  showError: boolean;
+  onChange: (e: any) => void;
+  onBlur: (e: any) => void;
+}) => {
+  return (
+    <View style={styles.formInputContainer}>
+      <Text style={styles.title}>{title}</Text>
+      <TextInput
+        style={styles.text}
+        value={value}
+        onChangeText={onChange}
+        onBlur={onBlur}
+      />
+      {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
+    </View>
+  );
+};
+
+const FormInputWithMask = ({
+  title,
+  value,
+  error,
+  showError,
+  onChange,
+  onBlur,
   mask,
 }: {
   title: string;
@@ -32,36 +61,19 @@ const FormInput = ({
   showError: boolean;
   onChange: (e: any) => void;
   onBlur: (e: any) => void;
-  mask?: string;
+  mask: string;
 }) => {
-  const InputComponent = () => {
-    if (!!mask) {
-      return (
-        <TextInputMask
-          style={styles.text}
-          value={value}
-          onChangeText={onChange}
-          onBlur={onBlur}
-          type="custom"
-          options={{ mask }}
-        />
-      );
-    } else {
-      return (
-        <TextInput
-          style={styles.text}
-          value={value}
-          onChangeText={onChange}
-          onBlur={onBlur}
-        />
-      );
-    }
-  };
-
   return (
     <View style={styles.formInputContainer}>
       <Text style={styles.title}>{title}</Text>
-      <InputComponent />
+      <TextInputMask
+        style={styles.text}
+        value={value}
+        onChangeText={onChange}
+        onBlur={onBlur}
+        type="custom"
+        options={{ mask }}
+      />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
     </View>
   );
@@ -169,7 +181,7 @@ export default function App({ navigation, route }) {
         <FormInput title="First Name" {...formikHelper("firstName")} />
         <FormInput title="Last Name" {...formikHelper("lastName")} />
         <FormInput title="Email" {...formikHelper("email")} />
-        <FormInput
+        <FormInputWithMask
           title="Phone"
           mask={"99 9999 9999"}
           {...formikHelper("phone")}
@@ -177,7 +189,7 @@ export default function App({ navigation, route }) {
         <FormInput title="Postcode" {...formikHelper("postcode")} />
         <StatePicker {...formikHelper("state")} />
         <FormInput title="Company Name" {...formikHelper("companyName")} />
-        <FormInput
+        <FormInputWithMask
           title="ABN"
           mask={"99 999 999 999"}
           {...formikHelper("abn")}
