@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  Button,
 } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 import { TextInputMask } from "react-native-masked-text";
@@ -119,6 +118,12 @@ const initialValues: FormValues = {
   insuranceExpiryDate: "",
 };
 
+const EditButton = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity onPress={onPress}>
+    <Text style={{ color: LIGHT_BLUE, fontSize: 18, margin: 10 }}>Edit</Text>
+  </TouchableOpacity>
+);
+
 interface AccountProps {
   navigation: NavigationProp<any>;
 }
@@ -139,20 +144,17 @@ export default function Account({ navigation }: AccountProps) {
     insuranceExpiryDate,
   } = info;
 
-  console.log("info", info);
-
   // on component update
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button
+        <EditButton
           onPress={() =>
             navigation.navigate("EditAccount", {
               accountInfo: info,
               updateAccountInfo: setInfo,
             })
           }
-          title="Edit"
         />
       ),
     });
