@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
-import { styles } from "../index";
+import { styles } from "../styles";
 
 interface FormInputWithMask {
   title: string;

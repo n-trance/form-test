@@ -1,13 +1,13 @@
 import React, { useState, ReactElement, useEffect } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 import { NavigationProp } from "@react-navigation/native";
 
-import { PRIMARY_COLOR, LIGHT_BLUE } from "../../constants";
 import { UploadResume } from "./components/UploadResume";
 import { Resume } from "./components/Resume";
 import { AccountItem } from "./components/AccountItem";
 import { EditButton } from "./components/EditButton";
+import { styles } from "./styles";
 
 interface FormValues {
   firstName: string;
@@ -158,37 +158,3 @@ export default function Account({ navigation }: Account) {
     </ScrollView>
   );
 }
-
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
-  horizontalContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignContent: "space-between",
-  },
-  accountItem: { flex: 1, margin: 10 },
-  title: { color: PRIMARY_COLOR, fontWeight: "bold", fontSize: 18 },
-  text: {
-    fontWeight: "500",
-    fontSize: 17,
-  },
-  toBeDetermined: { color: "gray", fontWeight: "500", fontSize: 16 },
-  resumeText: { color: LIGHT_BLUE, fontWeight: "500", fontSize: 16 },
-  resumeButton: {
-    margin: 10,
-    backgroundColor: PRIMARY_COLOR,
-    borderRadius: 50,
-    height: 50,
-    width: 220,
-    justifyContent: "center",
-  },
-  resumeButtonText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "500",
-    textAlign: "center",
-  },
-});

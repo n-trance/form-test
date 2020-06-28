@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
-import { styles } from "../index";
+import { styles } from "../styles";
 
 export interface UploadResume {
   onPress: () => void;

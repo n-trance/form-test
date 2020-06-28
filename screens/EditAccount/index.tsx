@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
   Button,
@@ -13,7 +12,6 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 
 import { schema } from "./schema";
-import { PRIMARY_COLOR } from "../../constants";
 import { FormInput } from "./components/FormInput";
 import { FormInputWithMask } from "./components/FormInputWithMask";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -21,6 +19,7 @@ import { NavigationProp, RouteProp } from "@react-navigation/native";
 import { StatePicker } from "./components/StatePicker";
 import { SaveButton } from "./components/SaveButton";
 import { FormValues } from "../../types";
+import { styles } from "./styles";
 
 const initialValues: FormValues = {
   firstName: "",
@@ -157,26 +156,3 @@ export default function EditAccount({ navigation, route }: EditAccount) {
     </KeyboardAvoidingView>
   );
 }
-
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  formInputContainer: { margin: 10 },
-  title: {
-    color: PRIMARY_COLOR,
-    fontWeight: "bold",
-    fontSize: 18,
-    margin: 10,
-  },
-  text: {
-    fontWeight: "500",
-    fontSize: 17,
-    borderBottomColor: "gray",
-    borderBottomWidth: 1.2,
-    margin: 10,
-  },
-  dropDownContainer: { height: 40 },
-  dropDown: { zIndex: 1 },
-});

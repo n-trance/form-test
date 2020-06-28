@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, TextInput, KeyboardType } from "react-native";
-import { styles } from "../index";
+import { styles } from "../styles";
 
 export interface FormInput {
   title: string;
