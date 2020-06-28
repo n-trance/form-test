@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement, ReactComponentElement } from "react";
 import {
   StyleSheet,
   Text,
@@ -50,7 +50,17 @@ const Resume = ({ uri, onPress }: Resume) => {
   );
 };
 
-const AccountItem = ({ title, value, render, style }) => {
+const AccountItem = ({
+  title,
+  value,
+  render,
+  style,
+}: {
+  title: string;
+  value: string;
+  render?: (val: string) => ReactElement;
+  style: any;
+}) => {
   let Item;
   if (!!value && !!render) {
     Item = () => render(value);
