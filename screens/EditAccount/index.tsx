@@ -13,6 +13,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useFormik } from "formik";
 
 import { auStates, schema } from "./schema";
+import { PRIMARY_COLOR } from "../../constants";
 
 const FormInput = ({
   title,
@@ -31,7 +32,7 @@ const FormInput = ({
 }) => {
   return (
     <View style={styles.formInputContainer}>
-      <Text>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <Input value={value} onChangeText={onChange} onBlur={onBlur} />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
     </View>
@@ -51,9 +52,10 @@ const StatePicker = ({
 }) => {
   return (
     <View style={styles.formInputContainer}>
+      <Text style={styles.title}>State</Text>
       <DropDownPicker
         items={auStates.map((item) => ({ label: item, value: item }))}
-        containerStyle={{ height: 40 }}
+        containerStyle={styles.dropDownContainer}
         onChangeItem={({ value }: { value: string }) => onChange(value)}
       />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
@@ -160,4 +162,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   formInputContainer: { margin: 10 },
+  title: {
+    color: PRIMARY_COLOR,
+    fontWeight: "bold",
+    fontSize: 18,
+    marginLeft: 10,
+  },
+  dropDownContainer: { height: 40, margin: 10 },
 });
