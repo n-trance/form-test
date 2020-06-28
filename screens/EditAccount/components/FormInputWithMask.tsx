@@ -22,11 +22,13 @@ export const FormInputWithMask = ({
   onBlur,
   mask,
 }: FormInputWithMask) => {
+  const errorStyle = { color: "maroon" };
+  const showErrorStyle = showError ? errorStyle : null;
   return (
     <View style={styles.formInputContainer}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, showErrorStyle]}>{title}</Text>
       <TextInputMask
-        style={styles.text}
+        style={[styles.text, showErrorStyle]}
         value={value}
         onChangeText={onChange}
         onBlur={onBlur}
@@ -35,7 +37,11 @@ export const FormInputWithMask = ({
         keyboardType="number-pad"
         returnKeyType="done"
       />
-      {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
+      {!!showError ? (
+        <Text style={[errorStyle, { textAlign: "right", margin: 10 }]}>
+          {error}
+        </Text>
+      ) : null}
     </View>
   );
 };

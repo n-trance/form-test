@@ -23,19 +23,25 @@ export const FormInput = ({
   keyboardType = "default",
   disabled = false,
 }: FormInput) => {
+  const errorStyle = { color: "maroon" };
+  const showErrorStyle = showError ? errorStyle : null;
   return (
     <View style={styles.formInputContainer}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, showErrorStyle]}>{title}</Text>
       <TextInput
         editable={!disabled}
-        style={styles.text}
+        style={[styles.text, showErrorStyle]}
         value={value}
         onChangeText={onChange}
         onBlur={onBlur}
         keyboardType={keyboardType}
         returnKeyType="done"
       />
-      {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
+      {!!showError ? (
+        <Text style={[errorStyle, { textAlign: "right", margin: 10 }]}>
+          {error}
+        </Text>
+      ) : null}
     </View>
   );
 };
