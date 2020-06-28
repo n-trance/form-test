@@ -93,7 +93,7 @@ interface FormValues {
   insuranceExpiryDate: string;
 }
 
-const initialValues: FormValues = {
+const validForm: FormValues = {
   firstName: "Bruce",
   lastName: "Banner",
   email: "bruce.banner@marvel.com",
@@ -106,7 +106,7 @@ const initialValues: FormValues = {
   insuranceExpiryDate: "31 May 1970",
 };
 
-const validForm: FormValues = {
+const initialValues: FormValues = {
   firstName: "",
   lastName: "",
   email: "",
@@ -209,7 +209,7 @@ export default function Account({ navigation }: AccountProps) {
       />
       <AccountItem
         title="Hourly Rate (in $)"
-        value={`$${hourlyRate} inc GST`}
+        value={!!hourlyRate ? `$${hourlyRate} inc GST` : ""}
         style={styles.accountItem}
       />
       <View style={styles.horizontalContainer}>
