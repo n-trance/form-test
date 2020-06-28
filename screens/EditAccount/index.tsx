@@ -167,13 +167,18 @@ export default function App({ navigation, route }) {
           />
         </TouchableOpacity>
         {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={new Date(formik.values.insuranceExpiryDate)}
-            mode="date"
-            display="default"
-            onChange={onChangeDate}
-          />
+          <>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={new Date(formik.values.insuranceExpiryDate)}
+              mode="date"
+              display="default"
+              onChange={onChangeDate}
+            />
+            {Platform.OS === "ios" ? (
+              <Button title="close" onPress={() => setShow(false)} />
+            ) : null}
+          </>
         )}
         {/* spacing at bottom of screen */}
         <View style={{ height: 200 }} />
