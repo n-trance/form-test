@@ -1,10 +1,16 @@
-import React, { useState, ReactElement, ReactComponentElement } from "react";
+import React, {
+  useState,
+  ReactElement,
+  ReactComponentElement,
+  useEffect,
+} from "react";
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 import { TextInputMask } from "react-native-masked-text";
@@ -150,6 +156,23 @@ export default function App({ navigation }) {
     hourlyRate,
     insuranceExpiryDate,
   } = info;
+
+  // on component update
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          onPress={() =>
+            navigation.navigate("EditAccount", {
+              accountInfo: info,
+              updateAccountInfo: setInfo,
+            })
+          }
+          title="Edit"
+        />
+      ),
+    });
+  });
 
   const [fileUri, setFileUri] = useState("");
 

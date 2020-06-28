@@ -65,6 +65,7 @@ const initialValues: FormValues = {
 export default function App({ navigation, route }) {
   // get params
   const accountInfo = route.params?.accountInfo || initialValues;
+  const { updateAccountInfo } = route.params;
 
   const formik = useFormik({
     initialValues: accountInfo,

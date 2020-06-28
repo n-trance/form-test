@@ -16,15 +16,7 @@ const AppNavigation = () => (
       <Stack.Screen
         name="Account"
         component={Account}
-        options={({ navigation }) => ({
-          title: "My Account",
-          headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate("EditAccount")}
-              title="edit"
-            />
-          ),
-        })}
+        options={{ title: "My Account" }}
       />
       <Stack.Screen
         name="EditAccount"
