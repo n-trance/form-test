@@ -194,7 +194,7 @@ export default function App({ navigation }) {
       />
       <AccountItem
         title="Hourly Rate (in $)"
-        value={hourlyRate}
+        value={`$${hourlyRate} inc GST`}
         style={styles.accountItem}
       />
       <View style={styles.horizontalContainer}>
