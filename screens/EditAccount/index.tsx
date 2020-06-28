@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
-  Text,
   ScrollView,
   KeyboardAvoidingView,
   Button,
@@ -9,53 +8,19 @@ import {
   Alert,
   Platform,
 } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
 import { useFormik } from "formik";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 
-import { auStates, schema } from "./schema";
-import { PRIMARY_COLOR, LIGHT_BLUE } from "../../constants";
-import { FormInput, FormInputWithMask } from "./FormInput";
+import { schema } from "./schema";
+import { PRIMARY_COLOR } from "../../constants";
+import { FormInput } from "./components/FormInput";
+import { FormInputWithMask } from "./components/FormInputWithMask";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
-
-const StatePicker = ({
-  error,
-  showError,
-  onChange,
-  onBlur,
-}: {
-  error: string;
-  showError: boolean;
-  onChange: (e: any) => void;
-  onBlur: (e: any) => void;
-}) => {
-  return (
-    <View style={[styles.formInputContainer, styles.dropDown]}>
-      <Text style={styles.title}>State</Text>
-      <DropDownPicker
-        items={auStates.map((item) => ({ label: item, value: item }))}
-        containerStyle={styles.dropDownContainer}
-        onChangeItem={({ value }: { value: string }) => onChange(value)}
-      />
-      {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
-    </View>
-  );
-};
-
-interface FormValues {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  postcode: string;
-  state: string;
-  companyName: string;
-  abn: string;
-  hourlyRate: string;
-  insuranceExpiryDate: string;
-}
+import { StatePicker } from "./components/StatePicker";
+import { SaveButton } from "./components/SaveButton";
+import { FormValues } from "../../types";
 
 const initialValues: FormValues = {
   firstName: "",
@@ -70,34 +35,12 @@ const initialValues: FormValues = {
   insuranceExpiryDate: "",
 };
 
-const SaveButton = ({
-  onPress,
-  disabled,
-}: {
-  onPress: () => void;
-  disabled?: boolean;
-}) => {
-  if (!disabled) {
-    return (
-      <TouchableOpacity onPress={onPress}>
-        <Text style={{ color: LIGHT_BLUE, fontSize: 18, margin: 10 }}>
-          Save
-        </Text>
-      </TouchableOpacity>
-    );
-  } else {
-    return (
-      <Text style={{ color: "gray", fontSize: 18, margin: 10 }}>Save</Text>
-    );
-  }
-};
-
-interface EditAccountProps {
+interface EditAccount {
   navigation: NavigationProp<any>;
   route: RouteProp<any, any>;
 }
 
-export default function EditAccount({ navigation, route }: EditAccountProps) {
+export default function EditAccount({ navigation, route }: EditAccount) {
   // get params
   const accountInfo = route.params?.accountInfo || initialValues;
   const { updateAccountInfo } = route.params;

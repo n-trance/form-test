@@ -1,83 +1,13 @@
 import React, { useState, ReactElement, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
-import { TextInputMask } from "react-native-masked-text";
-
-import { PRIMARY_COLOR, LIGHT_BLUE } from "../constants";
 import { NavigationProp } from "@react-navigation/native";
 
-interface UploadResume {
-  onPress: () => void;
-}
-
-const UploadResume = ({ onPress }: UploadResume) => (
-  <TouchableOpacity onPress={onPress}>
-    <View style={styles.resumeButton}>
-      <Text style={styles.resumeButtonText}>Upload new Resume</Text>
-    </View>
-  </TouchableOpacity>
-);
-
-interface Resume {
-  uri: string;
-  onPress: () => void;
-}
-
-const Resume = ({ uri, onPress }: Resume) => {
-  return (
-    <View style={styles.accountItem}>
-      <Text style={styles.title}>Resume</Text>
-      {uri ? (
-        <TouchableOpacity onPress={onPress}>
-          <Text style={styles.resumeText}>View Here</Text>
-        </TouchableOpacity>
-      ) : (
-        <Text style={styles.toBeDetermined}>None</Text>
-      )}
-    </View>
-  );
-};
-
-const AccountItem = ({
-  title,
-  value,
-  mask,
-  style,
-}: {
-  title: string;
-  value: string;
-  mask?: string;
-  style: any;
-}) => {
-  let Item;
-  if (!!value && !!mask) {
-    Item = () => (
-      <TextInputMask
-        value={value}
-        type="custom"
-        options={{ mask }}
-        style={styles.text}
-      />
-    );
-  } else if (!!value) {
-    Item = () => <Text style={styles.text}>{value}</Text>;
-  } else {
-    Item = () => <Text style={styles.toBeDetermined}>None</Text>;
-  }
-
-  return (
-    <View style={{ ...style }}>
-      <Text style={styles.title}>{title}</Text>
-      <Item />
-    </View>
-  );
-};
+import { PRIMARY_COLOR, LIGHT_BLUE } from "../../constants";
+import { UploadResume } from "./components/UploadResume";
+import { Resume } from "./components/Resume";
+import { AccountItem } from "./components/AccountItem";
+import { EditButton } from "./components/EditButton";
 
 interface FormValues {
   firstName: string;
@@ -92,6 +22,7 @@ interface FormValues {
   insuranceExpiryDate: string;
 }
 
+// EXAMPLE OF VALID FORM: replace initial value with this to prefill form.
 const validForm: FormValues = {
   firstName: "Bruce",
   lastName: "Banner",
@@ -118,17 +49,11 @@ const initialValues: FormValues = {
   insuranceExpiryDate: "",
 };
 
-const EditButton = ({ onPress }: { onPress: () => void }) => (
-  <TouchableOpacity onPress={onPress}>
-    <Text style={{ color: LIGHT_BLUE, fontSize: 18, margin: 10 }}>Edit</Text>
-  </TouchableOpacity>
-);
-
-interface AccountProps {
+interface Account {
   navigation: NavigationProp<any>;
 }
 
-export default function Account({ navigation }: AccountProps) {
+export default function Account({ navigation }: Account) {
   const [info, setInfo] = useState(initialValues);
 
   const {
@@ -234,7 +159,7 @@ export default function Account({ navigation }: AccountProps) {
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
