@@ -218,6 +218,8 @@ export default function App({ navigation, route }) {
           title="Insurance Expiry Date"
           {...formikHelper("insuranceExpiryDate")}
         />
+        {/* spacing at bottom of screen */}
+        <View style={{ height: 200 }} />
       </ScrollView>
     </KeyboardAvoidingView>
   );
