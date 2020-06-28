@@ -15,7 +15,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 
 import { auStates, schema } from "./schema";
-import { PRIMARY_COLOR } from "../../constants";
+import { PRIMARY_COLOR, LIGHT_BLUE } from "../../constants";
 import { FormInput, FormInputWithMask } from "./FormInput";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
@@ -70,6 +70,28 @@ const initialValues: FormValues = {
   insuranceExpiryDate: "",
 };
 
+const SaveButton = ({
+  onPress,
+  disabled,
+}: {
+  onPress: () => void;
+  disabled?: boolean;
+}) => {
+  if (!disabled) {
+    return (
+      <TouchableOpacity onPress={onPress}>
+        <Text style={{ color: LIGHT_BLUE, fontSize: 18, margin: 10 }}>
+          Save
+        </Text>
+      </TouchableOpacity>
+    );
+  } else {
+    return (
+      <Text style={{ color: "gray", fontSize: 18, margin: 10 }}>Save</Text>
+    );
+  }
+};
+
 interface EditAccountProps {
   navigation: NavigationProp<any>;
   route: RouteProp<any, any>;
@@ -95,13 +117,12 @@ export default function EditAccount({ navigation, route }: EditAccountProps) {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button
+        <SaveButton
           disabled={!formik.isValid}
           onPress={() => {
             updateAccountInfo(formik.values);
             Alert.alert("Account Details Saved");
           }}
-          title="Save"
         />
       ),
     });
