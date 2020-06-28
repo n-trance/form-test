@@ -114,11 +114,14 @@ export default function App({ navigation, route }) {
   // date picker states
   const [show, setShow] = useState(false);
 
-  const onChangeDate = (_, selectedDate) => {
-    const currentDate = selectedDate;
-    console.log("date", currentDate);
+  const onChangeDate = (_: any, selectedDate: Date | undefined) => {
+    // onClose or onSelect date
+    if (Platform.OS === "android") {
+      setShow(false);
+    }
+    const currentDate =
+      selectedDate || new Date(formik.values.insuranceExpiryDate);
     const date = moment(currentDate).format("DD MMM YYYY");
-    console.log("moment", date);
     formik.setFieldValue("insuranceExpiryDate", date);
   };
 
