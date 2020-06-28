@@ -23,7 +23,7 @@ export const FormInput = ({
   keyboardType = "default",
   disabled = false,
 }: FormInput) => {
-  const errorStyle = { color: "maroon" };
+  const errorStyle = { color: "maroon", borderBottomColor: "maroon" };
   const showErrorStyle = showError ? errorStyle : null;
   return (
     <View style={styles.formInputContainer}>
