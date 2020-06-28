@@ -78,7 +78,7 @@ const StatePicker = ({
   onBlur: (e: any) => void;
 }) => {
   return (
-    <View style={styles.formInputContainer}>
+    <View style={[styles.formInputContainer, { zIndex: 1 }]}>
       <Text style={styles.title}>State</Text>
       <DropDownPicker
         items={auStates.map((item) => ({ label: item, value: item }))}
