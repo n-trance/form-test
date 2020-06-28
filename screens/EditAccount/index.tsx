@@ -6,6 +6,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Button,
+  View,
 } from "react-native";
 import { Input } from "react-native-elements";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -29,11 +30,11 @@ const FormInput = ({
   onBlur: (e: any) => void;
 }) => {
   return (
-    <>
+    <View style={styles.formInputContainer}>
       <Text>{title}</Text>
       <Input value={value} onChangeText={onChange} onBlur={onBlur} />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
-    </>
+    </View>
   );
 };
 
@@ -49,14 +50,14 @@ const StatePicker = ({
   onBlur: (e: any) => void;
 }) => {
   return (
-    <>
+    <View style={styles.formInputContainer}>
       <DropDownPicker
         items={auStates.map((item) => ({ label: item, value: item }))}
         containerStyle={{ height: 40 }}
         onChangeItem={({ value }: { value: string }) => onChange(value)}
       />
       {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
-    </>
+    </View>
   );
 };
 
@@ -113,7 +114,7 @@ export default function App({ navigation, route }) {
             console.log("formik vals", formik.values);
             updateAccountInfo(formik.values);
           }}
-          title="save"
+          title="Save"
         />
       ),
     });
@@ -158,4 +159,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  formInputContainer: { margin: 10 },
 });

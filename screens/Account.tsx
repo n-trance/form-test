@@ -15,6 +15,8 @@ import {
 import * as DocumentPicker from "expo-document-picker";
 import { TextInputMask } from "react-native-masked-text";
 
+import { PRIMARY_COLOR, LIGHT_BLUE } from "../constants";
+
 interface UploadResume {
   onPress: () => void;
 }
@@ -250,9 +252,6 @@ export default function App({ navigation }) {
   );
 }
 
-const teal = "#1eae95";
-const lightBlue = "#0a9bce";
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -264,13 +263,13 @@ const styles = StyleSheet.create({
     alignContent: "space-between",
   },
   accountItem: { flex: 1, margin: 10 },
-  title: { color: teal, fontWeight: "bold", fontSize: 18 },
+  title: { color: PRIMARY_COLOR, fontWeight: "bold", fontSize: 18 },
   text: { fontWeight: "500", fontSize: 16 },
   toBeDetermined: { color: "gray", fontWeight: "500", fontSize: 16 },
-  resumeText: { color: lightBlue, fontWeight: "500", fontSize: 16 },
+  resumeText: { color: LIGHT_BLUE, fontWeight: "500", fontSize: 16 },
   resumeButton: {
     margin: 10,
-    backgroundColor: teal,
+    backgroundColor: PRIMARY_COLOR,
     borderRadius: 50,
     height: 50,
     width: 220,
