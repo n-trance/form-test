@@ -7,84 +7,14 @@ import {
   KeyboardAvoidingView,
   Button,
   View,
-  TextInput,
   Alert,
-  KeyboardType,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useFormik } from "formik";
-import { TextInputMask } from "react-native-masked-text";
 
 import { auStates, schema } from "./schema";
 import { PRIMARY_COLOR } from "../../constants";
-
-const FormInput = ({
-  title,
-  value,
-  error,
-  showError,
-  onChange,
-  onBlur,
-  keyboardType = "default",
-}: {
-  title: string;
-  value: string;
-  error: string;
-  showError: boolean;
-  onChange: (e: any) => void;
-  onBlur: (e: any) => void;
-  keyboardType?: KeyboardType;
-}) => {
-  return (
-    <View style={styles.formInputContainer}>
-      <Text style={styles.title}>{title}</Text>
-      <TextInput
-        style={styles.text}
-        value={value}
-        onChangeText={onChange}
-        onBlur={onBlur}
-        keyboardType={keyboardType}
-        returnKeyType="done"
-      />
-      {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
-    </View>
-  );
-};
-
-const FormInputWithMask = ({
-  title,
-  value,
-  error,
-  showError,
-  onChange,
-  onBlur,
-  mask,
-}: {
-  title: string;
-  value: string;
-  error: string;
-  showError: boolean;
-  onChange: (e: any) => void;
-  onBlur: (e: any) => void;
-  mask: string;
-}) => {
-  return (
-    <View style={styles.formInputContainer}>
-      <Text style={styles.title}>{title}</Text>
-      <TextInputMask
-        style={styles.text}
-        value={value}
-        onChangeText={onChange}
-        onBlur={onBlur}
-        type="custom"
-        options={{ mask }}
-        keyboardType="number-pad"
-        returnKeyType="done"
-      />
-      {!!showError ? <Text style={{ color: "maroon" }}>{error}</Text> : null}
-    </View>
-  );
-};
+import { FormInput, FormInputWithMask } from "./FormInput";
 
 const StatePicker = ({
   error,
@@ -225,7 +155,7 @@ export default function App({ navigation, route }) {
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
