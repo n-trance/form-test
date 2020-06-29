@@ -144,6 +144,8 @@ describe("ABN Tests", () => {
     expect(example2).toBe(true);
     const example3 = await yup.reach(schema, "abn").isValid("11223344556");
     expect(example3).toBe(true);
+    const example4 = await yup.reach(schema, "abn").isValid("11 111 111 111");
+    expect(example4).toBe(true);
   });
 });
 
