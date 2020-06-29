@@ -46,7 +46,7 @@ export const schema = yup.object().shape({
   companyName: yup.string().max(200).optional(),
   abn: yup
     .string()
-    .matches(/^[0-9]{11}$/, "Your ABN is not valid")
+    .matches(/^(\s?[0-9]){11}$/, "Your ABN is not valid")
     .optional(),
   hourlyRate: yup
     .string()
