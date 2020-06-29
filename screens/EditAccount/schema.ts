@@ -18,13 +18,13 @@ export const schema = yup.object().shape({
     .string()
     .min(1)
     .max(50, "character limit reached")
-    .matches(/^[a-z|A-Z]+$/)
+    .matches(/^[a-z|A-Z]+$/, "Name can only contain characters")
     .required("Your first name is required"),
   lastName: yup
     .string()
     .min(1)
     .max(50, "character limit reached")
-    .matches(/^[a-z|A-Z]+$/)
+    .matches(/^[a-z|A-Z]+$/, "Name can only contain characters")
     .required("Your last name is required"),
   email: yup
     .string()
