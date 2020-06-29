@@ -140,7 +140,11 @@ export default function EditAccount({ navigation, route }: EditAccount) {
           <>
             <DateTimePicker
               testID="dateTimePicker"
-              value={new Date(formik.values.insuranceExpiryDate)}
+              value={
+                !!formik.values.insuranceExpiryDate
+                  ? new Date(formik.values.insuranceExpiryDate)
+                  : new Date()
+              }
               mode="date"
               display="default"
               onChange={onChangeDate}
